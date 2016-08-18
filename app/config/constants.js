@@ -1,9 +1,9 @@
 import firebase from 'firebase';
 
 const config = {
-  apiKey: 'AIzaSyCCXshZQ1ZFUduwalIr-n4bcTprxk_NIlQ',
-  authDomain: 'udaciouscms.firebaseapp.com',
-  databaseURL: 'https://udaciouscms.firebaseio.com',
+  apiKey: "AIzaSyBhFwmgYWuh5dsh0DGWRZ9WC8I7y8sOM5M",
+  authDomain: "udaciouscms-2f090.firebaseapp.com",
+  databaseURL: "https://udaciouscms-2f090.firebaseio.com",
 };
 
 firebase.initializeApp(config);
