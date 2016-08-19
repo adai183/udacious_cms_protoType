@@ -43,8 +43,9 @@
     "eslint-plugin-react": "^4.3.0",
     "eslint-plugin-standard": "^1.3.2",
     "html-webpack-plugin": "^2.15.0",
-    "style-loader": "^0.13.1",
+    "resolve-url-loader": "^1.6.0",
     "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   }

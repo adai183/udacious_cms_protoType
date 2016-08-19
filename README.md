@@ -26,6 +26,9 @@ To try the example application out or to use the project, follow the instruction
 
    npm run production
 
+5. **Deploy**
+
+   firebase deploy
 
 ## Technologies / Libraries
 

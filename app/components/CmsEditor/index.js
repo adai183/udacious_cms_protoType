@@ -1,4 +1,6 @@
 import React from 'react'
+import styles from './index.module.scss'
+import cssModules from 'react-css-modules'
 import {MegadraftEditor, editorStateFromRaw, editorStateToJSON} from 'megadraft'
 import { stateToHTML } from 'draft-js-export-html'
 import { saveArticle } from '../../helpers/api'
@@ -60,8 +62,9 @@ class CmsEditor extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className={styles.container}>
         <input
+          className={styles.input}
           ref='titleInput'
           type='text'
           value={this.state.articleTitle}
@@ -71,6 +74,7 @@ class CmsEditor extends React.Component {
           editorState={this.state.editorState}
           onChange={this.onChange}/>
         <button
+          className={`button ${styles.button}`}
           onClick={this.publish}>
           Publish
         </button>
@@ -79,4 +83,4 @@ class CmsEditor extends React.Component {
   }
 }
 
-export default CmsEditor
+export default cssModules(CmsEditor, styles)
