@@ -74,7 +74,8 @@ class CmsEditor extends React.Component {
         </div>
         <MegadraftEditor
           editorState={this.state.editorState}
-          onChange={this.onChange}/>
+          onChange={this.onChange}
+          placeholder='Tell a story ...'/>
         <button
           className={`button ${styles.button}`}
           onClick={this.publish}>

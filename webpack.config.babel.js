@@ -57,6 +57,10 @@ const base = {
         test: /\.css$/,
         loader: 'style-loader!css-loader',
       },
+      {
+        test: /\.(jpg|png)$/,
+        loader: 'file?name=[path][name].[hash].[ext]',
+      },
     ],
   },
   resolve: {

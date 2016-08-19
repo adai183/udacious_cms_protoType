@@ -1,0 +1,33 @@
+.container {
+  width: 100%;
+  color: #525c65;
+  font-size: 18px;
+}
+
+.navContainer {
+  width: 100%;
+  margin: 15px auto;
+  padding: 0 5.5% 0 2%;
+  ul {
+    display: flex;
+    float: right;
+    flex-direction: row;
+    padding: 0;
+  }
+  li {
+    list-style-type: none;
+    padding: 0 10px;
+  }
+}
+
+.link {
+  color: inherit;
+  text-decoration: none;
+  &:hover {
+    color: #1877E6;
+  }
+}
+
+.logo{
+  max-height: 45px;
+}

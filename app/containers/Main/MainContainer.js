@@ -1,8 +1,12 @@
 import React from 'react'
+import { Navigation } from 'components'
 
 const MainContainer = (props) => (
   <div>
-    {props.children}
+    <Navigation />
+    <main>
+      {props.children}
+    </main>
   </div>
 )
 
