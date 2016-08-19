@@ -1,7 +1,7 @@
 
 # Udacious CMS ProtoType
 
-Experimental Prototype for the CMS feature that will be integrated in Udacity's community built Alumni Web App.
+Experimental prototype for the CMS feature that will be integrated in Udacity's community built Alumni Web App.
 
 # Documentation
 
