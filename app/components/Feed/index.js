@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import styles from './index.module.scss'
+import cssModules from 'react-css-modules'
 import { ref } from '../../config/constants'
 import { Title, ContentRenderer } from 'components'
 
@@ -19,7 +21,7 @@ class Feed extends Component { // eslint-disable-line react/prefer-stateless-fun
 
   render () {
     return (
-      <div>
+      <div className={styles.feed}>
         {this.state.articles.map((a) => {
           return (
             <div>
@@ -33,4 +35,4 @@ class Feed extends Component { // eslint-disable-line react/prefer-stateless-fun
   }
 }
 
-export default Feed
+export default cssModules(Feed, styles)

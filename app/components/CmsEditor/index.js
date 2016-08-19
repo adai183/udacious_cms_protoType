@@ -63,13 +63,15 @@ class CmsEditor extends React.Component {
   render () {
     return (
       <div className={styles.container}>
-        <input
+        <div className={styles.inputContainer}>
+          <input
           className={styles.input}
           ref='titleInput'
           type='text'
           value={this.state.articleTitle}
           onChange={this.handleInputChange}
           placeholder='Title'/>
+        </div>
         <MegadraftEditor
           editorState={this.state.editorState}
           onChange={this.onChange}/>

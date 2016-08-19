@@ -7,6 +7,13 @@
   margin: 15px auto !important;
 }
 
+.inputContainer {
+  input,
+  input::-webkit-input-placeholder {
+    font-size:  1.5rem;
+  }
+}
+
 .input {
   border: 0 !important;
   box-shadow: none !important;
