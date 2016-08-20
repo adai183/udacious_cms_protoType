@@ -29,9 +29,7 @@ class CmsEditor extends React.Component {
       const contentState = this.state.editorState.getCurrentContent()
       const content = editorStateToJSON(this.state.editorState)
       const entityMap = JSON.parse(content).entityMap
-      console.log('entityMap', entityMap)
       const formattedContent = JSON.parse(content).blocks
-
 
       /*
       for (var i = 0, len = formattedContent.length; i < len; i++) {
@@ -43,7 +41,6 @@ class CmsEditor extends React.Component {
       }
       */
 
-      console.log('formattedContent', formattedContent);
       formattedContent.forEach((content) => {
         if (content.hasOwnProperty('entityRanges')) {
           for (var i = 0; i < content.entityRanges.length; i++) {
@@ -53,7 +50,6 @@ class CmsEditor extends React.Component {
           }
         }
       })
-
 
       const html = stateToHTML(contentState, options)
       const articleTitle = this.state.articleTitle

@@ -16,6 +16,7 @@ class Feed extends Component { // eslint-disable-line react/prefer-stateless-fun
       const allArticles = snapshot.val()
       const arr = Object.keys(allArticles).map((k) => allArticles[k])
       this.setState({ articles: arr })
+      console.log(this.state.articles)
     })
   }
 
