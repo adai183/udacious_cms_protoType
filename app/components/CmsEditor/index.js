@@ -28,8 +28,12 @@ class CmsEditor extends React.Component {
 
       const contentState = this.state.editorState.getCurrentContent()
       const content = editorStateToJSON(this.state.editorState)
+      const entityMap = JSON.parse(content).entityMap
+      console.log('entityMap', entityMap)
       const formattedContent = JSON.parse(content).blocks
 
+
+      /*
       for (var i = 0, len = formattedContent.length; i < len; i++) {
         if (formattedContent[i].hasOwnProperty('entityRanges')) {
           for (var z = 0, lenZ = formattedContent[i].entityRanges.length; z < lenZ; z++) {
@@ -37,6 +41,20 @@ class CmsEditor extends React.Component {
           }
         }
       }
+      */
+
+      console.log('formattedContent', formattedContent);
+      formattedContent.forEach((content) => {
+        if (content.hasOwnProperty('entityRanges')) {
+          for (var i = 0; i < content.entityRanges.length; i++) {
+            const searchIndex = content.entityRanges[i].key
+            content.entityRanges[i].href = entityMap[searchIndex].data.href
+            content.entityRanges[i].title = entityMap[searchIndex].data.title ? entityMap[searchIndex].data.title : ''
+          }
+        }
+      })
+
+
       const html = stateToHTML(contentState, options)
       const articleTitle = this.state.articleTitle
       /*eslint-disable */
