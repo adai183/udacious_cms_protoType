@@ -13,7 +13,23 @@ class ContentRenderer extends Component { // eslint-disable-line react/prefer-st
         case 'unstyled':
           return <p key={block.key}>{block.text}</p>
         case 'atomic':
-          return <p key={block.key}><img src={block.data.src} /></p>
+          if (block.data.type === 'image') {
+            return <p key={block.key}><img src={block.data.src} /></p>
+          } else if (block.data.type === 'video') {
+            /*
+              TODO: - Decide wether to use embed url
+                    - Check video style in MegadraftEditor
+            */
+            return (
+              <p key={block.key}>
+                <iframe
+                src={block.data.src}
+                width='640"' height='360'
+                frameBorder='0'
+                allowFullscreen />
+              </p>
+            )
+          }
         case 'blockquote':
           return <blockquote key={block.key}>{block.text}</blockquote>
         default:

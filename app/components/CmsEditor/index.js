@@ -29,6 +29,14 @@ class CmsEditor extends React.Component {
       const contentState = this.state.editorState.getCurrentContent()
       const content = editorStateToJSON(this.state.editorState)
       const formattedContent = JSON.parse(content).blocks
+
+      for (var i = 0, len = formattedContent.length; i < len; i++) {
+        if (formattedContent[i].hasOwnProperty('entityRanges')) {
+          for (var z = 0, lenZ = formattedContent[i].entityRanges.length; z < lenZ; z++) {
+            console.log('test',formattedContent[i].entityRanges[z])
+          }
+        }
+      }
       const html = stateToHTML(contentState, options)
       const articleTitle = this.state.articleTitle
       /*eslint-disable */
