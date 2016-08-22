@@ -9,9 +9,42 @@ class ContentRenderer extends Component { // eslint-disable-line react/prefer-st
           - render Links
     */
     const blocks = this.props.contentBlocks.map((block) => {
+      // add inline styling
+      let styledTxt = [block.text]
+      function addLinkTags () {
+        let currentTxtPosition = 0
+        if (block.entityRanges) {
+          styledTxt = []
+          for (var i = 0; i < block.entityRanges.length; i++) {
+            let offset = block.entityRanges[i].offset
+            let linkTextLen = block.entityRanges[i].length
+            let linkTextEnd = offset + linkTextLen
+            let href = block.entityRanges[i].href
+            let linkTitle = block.text.substring(offset, linkTextEnd)
+
+            let plainTxt = block.text.substring(currentTxtPosition, offset)
+            let link = <a href={href}>{linkTitle}</a>
+
+            styledTxt.push(plainTxt, link)
+            currentTxtPosition = offset + linkTextLen
+
+            // add text fragment after last link
+            if (i === block.entityRanges.length - 1) {
+              let textTail = block.text.substring(linkTextEnd, block.text.length)
+              styledTxt.push(textTail)
+            }
+          }
+          console.log(block.text, styledTxt)
+        }
+      }
+      addLinkTags()
+
+      // Take care of block styles
       switch (block.type) {
+
         case 'unstyled':
-          return <p key={block.key}>{block.text}</p>
+          return <p key={block.key}>{styledTxt}</p>
+
         case 'atomic':
           if (block.data.type === 'image') {
             return <p key={block.key}><img src={block.data.src} /></p>
@@ -30,10 +63,11 @@ class ContentRenderer extends Component { // eslint-disable-line react/prefer-st
               </p>
             )
           }
+
         case 'blockquote':
-          return <blockquote key={block.key}>{block.text}</blockquote>
+          return <blockquote key={block.key}>{styledTxt}</blockquote>
         default:
-          return <p key={block.key}>{block.text}</p>
+          return <p key={block.key}>{styledTxt}</p>
       }
     })
 
