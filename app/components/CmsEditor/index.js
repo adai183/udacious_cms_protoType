@@ -40,9 +40,11 @@ class CmsEditor extends React.Component {
     const { editorState, articleTitle } = this.state
     const json = editorStateToJSON(editorState)
     const html = stateToHTML(editorState.getCurrentContent(), this.editorOpts)
+    const parsedJson = JSON.parse(json)
+
 
     // save the article
-    saveArticle2(articleTitle, json, html)
+    saveArticle2(articleTitle, parsedJson, html)
 
     // clear the editor state
     // TODO: saveArticle2 should return a promise
