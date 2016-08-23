@@ -24,7 +24,12 @@ class CmsEditor extends React.Component {
       blockRenderers: {
         atomic: (block) => {
           const data = block.getData()
-          return `<img src="${data._root.entries[0][1]}">`
+          switch (data._root.entries[1][1]) {
+            case 'image':
+              return `<img src="${data._root.entries[0][1]}">`
+            case 'video':
+              return `<iframe width="560" height="315" src="${data._root.entries[0][1]}" frameborder="0" allowfullscreen />`
+          }
         },
       },
     }
