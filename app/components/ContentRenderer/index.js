@@ -15,12 +15,12 @@ const addLinkedTxt = (block) => {
   let pos = 0
   let linkedTxt = []
   // loop through the entities
-  entityRanges.forEach(entity => {
+  entityRanges.forEach((entity, i) => {
     const { href, length, offset } = entity
     // add the text before the link
     linkedTxt.push(text.slice(pos, offset))
     // add the link
-    linkedTxt.push((<a href={href}>{text.slice(offset, offset + length)}</a>))
+    linkedTxt.push((<a key={i} href={href}>{text.slice(offset, offset + length)}</a>))
     // update position
     pos = offset + length
   })
