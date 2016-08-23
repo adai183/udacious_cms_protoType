@@ -34,7 +34,6 @@ class ContentRenderer extends Component { // eslint-disable-line react/prefer-st
               styledTxt.push(textTail)
             }
           }
-          console.log(block.text, styledTxt)
         }
       }
       addLinkTags()
