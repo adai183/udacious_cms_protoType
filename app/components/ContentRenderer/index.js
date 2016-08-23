@@ -6,34 +6,26 @@ class ContentRenderer extends Component { // eslint-disable-line react/prefer-st
     /*
     TODO: complete mapping for all styles
           - render inlineStyles
-          - render Links
+          [x] render links ---> kratam rocks
     */
     const blocks = this.props.contentBlocks.map((block) => {
       // add inline styling
       let styledTxt = [block.text]
       function addLinkTags () {
-        let currentTxtPosition = 0
         if (block.entityRanges) {
           styledTxt = []
-          for (var i = 0; i < block.entityRanges.length; i++) {
-            let offset = block.entityRanges[i].offset
-            let linkTextLen = block.entityRanges[i].length
-            let linkTextEnd = offset + linkTextLen
-            let href = block.entityRanges[i].href
-            let linkTitle = block.text.substring(offset, linkTextEnd)
-
-            let plainTxt = block.text.substring(currentTxtPosition, offset)
-            let link = <a href={href}>{linkTitle}</a>
-
-            styledTxt.push(plainTxt, link)
-            currentTxtPosition = offset + linkTextLen
-
-            // add text fragment after last link
-            if (i === block.entityRanges.length - 1) {
-              let textTail = block.text.substring(linkTextEnd, block.text.length)
-              styledTxt.push(textTail)
-            }
-          }
+          let pos = 0
+          block.entityRanges.forEach(link => {
+            let {offset, href, length} = link
+            // add the text before the link
+            styledTxt.push(block.text.slice(pos, offset))
+            // add the link
+            styledTxt.push((<a href={href}>{block.text.slice(offset, offset + length)}</a>))
+            // update position
+            pos = offset + length
+          })
+          // add string after the last link
+          styledTxt.push(block.text.slice(pos))
         }
       }
       addLinkTags()
