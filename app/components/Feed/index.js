@@ -2,22 +2,27 @@ import React, { Component } from 'react'
 import styles from './index.module.scss'
 import cssModules from 'react-css-modules'
 import { ref } from '../../config/constants'
-import { Title, ContentRenderer } from 'components'
+import { Title } from 'components'
 
 class Feed extends Component { // eslint-disable-line react/prefer-stateless-function
   constructor (props) {
     super(props)
 
     this.state = { articles: [] }
+    this.renderInnerHtml = ::this.renderInnerHtml
   }
 
   componentWillMount () {
-    ref.child('articles').on('value', (snapshot) => {
+    ref.child('articles2').on('value', (snapshot) => {
       const allArticles = snapshot.val()
       const arr = Object.keys(allArticles).map((k) => allArticles[k])
       this.setState({ articles: arr })
       console.log(this.state.articles)
     })
+  }
+
+  renderInnerHtml (__html) {
+    return {__html}
   }
 
   render () {
@@ -27,7 +32,7 @@ class Feed extends Component { // eslint-disable-line react/prefer-stateless-fun
           return (
             <div>
               <Title content={a.title} key={a.articleId} />
-              <ContentRenderer contentBlocks={a.contentBlocks} key={a.title} />
+              <div dangerouslySetInnerHTML={this.renderInnerHtml(a.html)}/>
             </div>
           )
         })}
