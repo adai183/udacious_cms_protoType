@@ -8,3 +8,9 @@ export function saveArticle (title, article) {
 
   console.log('%cDB: \n', 'font-weight: bold', dbData)
 }
+
+export function saveArticle2 (title, editorState, html) {
+  const articleId = ref.child('articles2').push().key
+  const data = { title, editorState, html }
+  ref.child(`articles2/${articleId}`).set(data)
+}
