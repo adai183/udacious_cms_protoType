@@ -3,9 +3,10 @@ import styles from './index.module.scss'
 import cssModules from 'react-css-modules'
 import {MegadraftEditor, editorStateFromRaw, editorStateToJSON} from 'megadraft'
 import { stateToHTML } from 'draft-js-export-html'
-import { saveArticle } from '../../helpers/api'
+import { saveArticle2 } from '../../helpers/api'
 
 class CmsEditor extends React.Component {
+
   constructor (props) {
     super(props)
     this.state = {
@@ -13,65 +14,39 @@ class CmsEditor extends React.Component {
       articleTitle: '',
     }
 
+    // bindings
     this.onChange = ::this.onChange
     this.handleInputChange = ::this.handleInputChange
+    this.publish = ::this.publish
 
-    this.publish = () => {
-      const options = {
-        blockRenderers: {
-          atomic: (block) => {
-            const data = block.getData()
-            return `<img src="${data._root.entries[0][1]}">`
-          },
+    // editor options
+    this.editorOpts = {
+      blockRenderers: {
+        atomic: (block) => {
+          const data = block.getData()
+          return `<img src="${data._root.entries[0][1]}">`
         },
-      }
+      },
+    }
+  }
 
-      const contentState = this.state.editorState.getCurrentContent()
-      const content = editorStateToJSON(this.state.editorState)
-      const entityMap = JSON.parse(content).entityMap
-      const formattedContent = JSON.parse(content).blocks
+  // publish the article to firebase
+  publish () {
+    const { editorState, articleTitle } = this.state
+    const json = editorStateToJSON(editorState)
+    const html = stateToHTML(editorState.getCurrentContent(), this.editorOpts)
 
-      /*
-      for (var i = 0, len = formattedContent.length; i < len; i++) {
-        if (formattedContent[i].hasOwnProperty('entityRanges')) {
-          for (var z = 0, lenZ = formattedContent[i].entityRanges.length; z < lenZ; z++) {
-            console.log('test',formattedContent[i].entityRanges[z])
-          }
-        }
-      }
-      */
+    // save the article
+    saveArticle2(articleTitle, json, html)
 
-      formattedContent.forEach((content) => {
-        if (content.hasOwnProperty('entityRanges')) {
-          for (var i = 0; i < content.entityRanges.length; i++) {
-            const searchIndex = content.entityRanges[i].key
-            content.entityRanges[i].href = entityMap[searchIndex].data.href
-            content.entityRanges[i].title = entityMap[searchIndex].data.title ? entityMap[searchIndex].data.title : ''
-          }
-        }
-      })
-
-      const html = stateToHTML(contentState, options)
-      const articleTitle = this.state.articleTitle
-      /*eslint-disable */
-      console.log('%cJSON: \n', 'font-weight: bold', content)
-      console.log('%cHTML: \n', 'font-weight: bold', html)
-      /*eslint-ensable */
-
-      saveArticle(articleTitle,formattedContent);
-
-      /* Helper function to read block data
-      const blockData = contentState.getBlocksAsArray().map(function (block) {
-        return block.getData()._root;
-      });
-      console.log(blockData);
-      */
-
-      this.setState({
-        editorState: editorStateFromRaw(null) ,
-        articleTitle: '',
-      });
-    };
+    // clear the editor state
+    // TODO: saveArticle2 should return a promise
+    // and we should clear the state only if
+    // the save was successful
+    this.setState({
+      editorState: editorStateFromRaw(null),
+      articleTitle: '',
+    })
   }
 
   onChange (editorState) {
@@ -101,7 +76,7 @@ class CmsEditor extends React.Component {
         <button
           className={`button ${styles.button}`}
           onClick={this.publish}>
-          Publish
+          {'Publish'}
         </button>
       </div>
     )
