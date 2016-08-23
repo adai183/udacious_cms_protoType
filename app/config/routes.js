@@ -1,7 +1,7 @@
 import React from 'react'
 import { Router, Route, browserHistory, IndexRoute } from 'react-router'
-import { MainContainer } from 'containers'
-import { Feed, CmsEditor } from 'components'
+import { MainContainer, Feed } from 'containers'
+import { CmsEditor } from 'components'
 
 const routes = (
   <Router history={browserHistory}>
