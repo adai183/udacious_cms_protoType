@@ -43,6 +43,7 @@ To try the example application out or to use the project, follow the instruction
 - [react-foundation](https://github.com/nordsoftware/react-foundation) - Foundation React components, use or don't use.
 - [SASS](http://sass-lang.com/) - styles
 - [ESLint](http://eslint.org/) - linter
+- [Megadraft](http://globocom.github.io/megadraft) - Rich Text editor built on top of draft.js (Work in Progress)
 
 ## Timeline / TODOS
 * [x] Create Prototype

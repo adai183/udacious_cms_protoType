@@ -65,6 +65,10 @@ class CmsEditor extends React.Component {
   }
 
   render () {
+    const { editorState, articleTitle } = this.state
+    const html = stateToHTML(editorState.getCurrentContent(), this.editorOpts)
+    console.log('HTML \n', html)
+
     return (
       <div className={styles.container}>
         <div className={styles.inputContainer}>
