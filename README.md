@@ -32,6 +32,7 @@ To try the example application out or to use the project, follow the instruction
 
 ## Technologies / Libraries
 
+- [Megadraft](http://globocom.github.io/megadraft) - Rich Text editor built on top of draft.js (Work in Progress)
 - [Node](https://nodejs.org/en/) - JS runtime environment
 - [npm](https://www.npmjs.com/) - package manager
 - [Babel](https://babeljs.io/) - ES6 transpiler
@@ -43,7 +44,6 @@ To try the example application out or to use the project, follow the instruction
 - [react-foundation](https://github.com/nordsoftware/react-foundation) - Foundation React components, use or don't use.
 - [SASS](http://sass-lang.com/) - styles
 - [ESLint](http://eslint.org/) - linter
-- [Megadraft](http://globocom.github.io/megadraft) - Rich Text editor built on top of draft.js (Work in Progress)
 
 ## Timeline / TODOS
 * [x] Create Prototype
